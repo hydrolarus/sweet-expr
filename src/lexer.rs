@@ -2,7 +2,7 @@ use std::ops::Range;
 
 use logos::Logos;
 
-#[derive(Logos, Debug, PartialEq, Clone)]
+#[derive(Logos, Debug, PartialEq, Clone, Copy)]
 pub enum Token<'src> {
     #[regex(r#"[^\s\(\)\{\}\[\]\";]+"#)]
     Identifier(&'src str),
@@ -26,8 +26,8 @@ pub enum Token<'src> {
     #[token("]")]
     BracketClose,
 
-    #[token("\n")]
-    #[token("\r\n")]
+    #[regex("[ \\t\\f]*\n")]
+    #[regex("[ \\t\\f]*\r\n")]
     Newline,
     #[regex(r"[ \t\f]+")]
     Spaces(&'src str),

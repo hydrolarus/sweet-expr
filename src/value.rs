@@ -1,5 +1,6 @@
 use std::ops::{Deref, DerefMut};
 
+#[derive(Debug)]
 pub struct Spanned<T>(pub T, pub std::ops::Range<usize>);
 
 impl<T> Deref for Spanned<T> {
@@ -16,6 +17,7 @@ impl<T> DerefMut for Spanned<T> {
     }
 }
 
+#[derive(Debug)]
 pub enum Atom<'src> {
     /// Any non-string,-bracket or -whitespace sequence of characters
     Identifier(Spanned<&'src str>),
@@ -28,6 +30,7 @@ pub enum Atom<'src> {
     },
 }
 
+#[derive(Debug)]
 pub enum GroupType {
     Indentation, // practically the same as Parenthesis
     Parenthesis,
@@ -35,6 +38,7 @@ pub enum GroupType {
     Bracket,
 }
 
+#[derive(Debug)]
 pub struct Group<'src> {
     pub group_type: GroupType,
     pub start_delim: Spanned<()>,
